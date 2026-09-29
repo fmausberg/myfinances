@@ -42,3 +42,13 @@ export type Verification = Prisma.VerificationModel
  * 
  */
 export type RateLimit = Prisma.RateLimitModel
+/**
+ * Model Partner
+ * 
+ */
+export type Partner = Prisma.PartnerModel
+/**
+ * Model PartnerUserLink
+ * 
+ */
+export type PartnerUserLink = Prisma.PartnerUserLinkModel

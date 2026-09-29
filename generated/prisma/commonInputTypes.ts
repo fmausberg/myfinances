@@ -189,6 +189,40 @@ export type BigIntWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedBigIntFilter<$PrismaModel>
 }
 
+export type EnumPartnerTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.PartnerType | Prisma.EnumPartnerTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.PartnerType[] | Prisma.ListEnumPartnerTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PartnerType[] | Prisma.ListEnumPartnerTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPartnerTypeFilter<$PrismaModel> | $Enums.PartnerType
+}
+
+export type EnumPartnerTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PartnerType | Prisma.EnumPartnerTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.PartnerType[] | Prisma.ListEnumPartnerTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PartnerType[] | Prisma.ListEnumPartnerTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPartnerTypeWithAggregatesFilter<$PrismaModel> | $Enums.PartnerType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPartnerTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPartnerTypeFilter<$PrismaModel>
+}
+
+export type EnumPartnerLinkStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.PartnerLinkStatus | Prisma.EnumPartnerLinkStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.PartnerLinkStatus[] | Prisma.ListEnumPartnerLinkStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PartnerLinkStatus[] | Prisma.ListEnumPartnerLinkStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPartnerLinkStatusFilter<$PrismaModel> | $Enums.PartnerLinkStatus
+}
+
+export type EnumPartnerLinkStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PartnerLinkStatus | Prisma.EnumPartnerLinkStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.PartnerLinkStatus[] | Prisma.ListEnumPartnerLinkStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PartnerLinkStatus[] | Prisma.ListEnumPartnerLinkStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPartnerLinkStatusWithAggregatesFilter<$PrismaModel> | $Enums.PartnerLinkStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPartnerLinkStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPartnerLinkStatusFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -375,6 +409,40 @@ export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedBigIntFilter<$PrismaModel>
   _min?: Prisma.NestedBigIntFilter<$PrismaModel>
   _max?: Prisma.NestedBigIntFilter<$PrismaModel>
+}
+
+export type NestedEnumPartnerTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.PartnerType | Prisma.EnumPartnerTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.PartnerType[] | Prisma.ListEnumPartnerTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PartnerType[] | Prisma.ListEnumPartnerTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPartnerTypeFilter<$PrismaModel> | $Enums.PartnerType
+}
+
+export type NestedEnumPartnerTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PartnerType | Prisma.EnumPartnerTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.PartnerType[] | Prisma.ListEnumPartnerTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PartnerType[] | Prisma.ListEnumPartnerTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPartnerTypeWithAggregatesFilter<$PrismaModel> | $Enums.PartnerType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPartnerTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPartnerTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumPartnerLinkStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.PartnerLinkStatus | Prisma.EnumPartnerLinkStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.PartnerLinkStatus[] | Prisma.ListEnumPartnerLinkStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PartnerLinkStatus[] | Prisma.ListEnumPartnerLinkStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPartnerLinkStatusFilter<$PrismaModel> | $Enums.PartnerLinkStatus
+}
+
+export type NestedEnumPartnerLinkStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PartnerLinkStatus | Prisma.EnumPartnerLinkStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.PartnerLinkStatus[] | Prisma.ListEnumPartnerLinkStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PartnerLinkStatus[] | Prisma.ListEnumPartnerLinkStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPartnerLinkStatusWithAggregatesFilter<$PrismaModel> | $Enums.PartnerLinkStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPartnerLinkStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPartnerLinkStatusFilter<$PrismaModel>
 }
 
 

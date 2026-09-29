@@ -9,7 +9,19 @@
 * 🟢 You can import this file directly.
 */
 
+export const PartnerType = {
+  NATURAL_PERSON: 'NATURAL_PERSON',
+  LEGAL_ENTITY: 'LEGAL_ENTITY'
+} as const
+
+export type PartnerType = (typeof PartnerType)[keyof typeof PartnerType]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const PartnerLinkStatus = {
+  PENDING: 'PENDING',
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED',
+  REVOKED: 'REVOKED'
+} as const
+
+export type PartnerLinkStatus = (typeof PartnerLinkStatus)[keyof typeof PartnerLinkStatus]

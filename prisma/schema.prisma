@@ -8,16 +8,18 @@ datasource db {
 }
 
 model User {
-  id              String    @id @default(cuid())
-  number          Int       @unique @default(autoincrement())
-  name            String
-  email           String    @unique
-  emailVerifiedAt DateTime?
-  image           String?
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-  sessions        Session[]
-  accounts        Account[]
+  id                   String            @id @default(cuid())
+  number               Int               @unique @default(autoincrement())
+  name                 String
+  email                String            @unique
+  emailVerifiedAt      DateTime?
+  image                String?
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
+  sessions             Session[]
+  accounts             Account[]
+  ownedPartners        Partner[]         @relation("OwnedPartners")
+  receivedPartnerLinks PartnerUserLink[] @relation("ReceivedPartnerLinks")
 }
 
 model Session {
@@ -75,4 +77,54 @@ model RateLimit {
   key         String @unique
   count       Int
   lastRequest BigInt
+}
+
+enum PartnerType {
+  NATURAL_PERSON
+  LEGAL_ENTITY
+}
+
+enum PartnerLinkStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  REVOKED
+}
+
+model Partner {
+  id          String      @id @default(cuid())
+  number      Int         @unique @default(autoincrement())
+  type        PartnerType
+  name        String
+  email       String?
+  notes       String?
+  contactLink String?
+
+  ownerId String
+  owner   User   @relation("OwnedPartners", fields: [ownerId], references: [id], onDelete: Cascade)
+
+  userLink PartnerUserLink?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([ownerId])
+}
+
+model PartnerUserLink {
+  id           String  @id @default(cuid())
+  number       Int     @unique @default(autoincrement())
+  partnerId    String  @unique
+  partner      Partner @relation(fields: [partnerId], references: [id], onDelete: Cascade)
+  linkedUserId String
+  linkedUser   User    @relation("ReceivedPartnerLinks", fields: [linkedUserId], references: [id], onDelete: Cascade)
+
+  status     PartnerLinkStatus @default(PENDING)
+  acceptedAt DateTime?
+  revokedAt  DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([linkedUserId, status])
 }

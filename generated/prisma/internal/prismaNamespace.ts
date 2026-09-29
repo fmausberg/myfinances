@@ -401,7 +401,9 @@ export const ModelName = {
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
-  RateLimit: 'RateLimit'
+  RateLimit: 'RateLimit',
+  Partner: 'Partner',
+  PartnerUserLink: 'PartnerUserLink'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -417,7 +419,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "rateLimit"
+    modelProps: "user" | "session" | "account" | "verification" | "rateLimit" | "partner" | "partnerUserLink"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -791,6 +793,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Partner: {
+      payload: Prisma.$PartnerPayload<ExtArgs>
+      fields: Prisma.PartnerFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PartnerFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PartnerPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PartnerFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PartnerPayload>
+        }
+        findFirst: {
+          args: Prisma.PartnerFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PartnerPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PartnerFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PartnerPayload>
+        }
+        findMany: {
+          args: Prisma.PartnerFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PartnerPayload>[]
+        }
+        create: {
+          args: Prisma.PartnerCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PartnerPayload>
+        }
+        createMany: {
+          args: Prisma.PartnerCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PartnerCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PartnerPayload>[]
+        }
+        delete: {
+          args: Prisma.PartnerDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PartnerPayload>
+        }
+        update: {
+          args: Prisma.PartnerUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PartnerPayload>
+        }
+        deleteMany: {
+          args: Prisma.PartnerDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PartnerUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PartnerUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PartnerPayload>[]
+        }
+        upsert: {
+          args: Prisma.PartnerUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PartnerPayload>
+        }
+        aggregate: {
+          args: Prisma.PartnerAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePartner>
+        }
+        groupBy: {
+          args: Prisma.PartnerGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PartnerGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PartnerCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PartnerCountAggregateOutputType> | number
+        }
+      }
+    }
+    PartnerUserLink: {
+      payload: Prisma.$PartnerUserLinkPayload<ExtArgs>
+      fields: Prisma.PartnerUserLinkFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PartnerUserLinkFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PartnerUserLinkPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PartnerUserLinkFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PartnerUserLinkPayload>
+        }
+        findFirst: {
+          args: Prisma.PartnerUserLinkFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PartnerUserLinkPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PartnerUserLinkFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PartnerUserLinkPayload>
+        }
+        findMany: {
+          args: Prisma.PartnerUserLinkFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PartnerUserLinkPayload>[]
+        }
+        create: {
+          args: Prisma.PartnerUserLinkCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PartnerUserLinkPayload>
+        }
+        createMany: {
+          args: Prisma.PartnerUserLinkCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PartnerUserLinkCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PartnerUserLinkPayload>[]
+        }
+        delete: {
+          args: Prisma.PartnerUserLinkDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PartnerUserLinkPayload>
+        }
+        update: {
+          args: Prisma.PartnerUserLinkUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PartnerUserLinkPayload>
+        }
+        deleteMany: {
+          args: Prisma.PartnerUserLinkDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PartnerUserLinkUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PartnerUserLinkUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PartnerUserLinkPayload>[]
+        }
+        upsert: {
+          args: Prisma.PartnerUserLinkUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PartnerUserLinkPayload>
+        }
+        aggregate: {
+          args: Prisma.PartnerUserLinkAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePartnerUserLink>
+        }
+        groupBy: {
+          args: Prisma.PartnerUserLinkGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PartnerUserLinkGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PartnerUserLinkCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PartnerUserLinkCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -903,6 +1053,37 @@ export const RateLimitScalarFieldEnum = {
 export type RateLimitScalarFieldEnum = (typeof RateLimitScalarFieldEnum)[keyof typeof RateLimitScalarFieldEnum]
 
 
+export const PartnerScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  type: 'type',
+  name: 'name',
+  email: 'email',
+  notes: 'notes',
+  contactLink: 'contactLink',
+  ownerId: 'ownerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PartnerScalarFieldEnum = (typeof PartnerScalarFieldEnum)[keyof typeof PartnerScalarFieldEnum]
+
+
+export const PartnerUserLinkScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  partnerId: 'partnerId',
+  linkedUserId: 'linkedUserId',
+  status: 'status',
+  acceptedAt: 'acceptedAt',
+  revokedAt: 'revokedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PartnerUserLinkScalarFieldEnum = (typeof PartnerUserLinkScalarFieldEnum)[keyof typeof PartnerUserLinkScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -986,6 +1167,34 @@ export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
  * Reference to a field of type 'BigInt[]'
  */
 export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PartnerType'
+ */
+export type EnumPartnerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PartnerType'>
+    
+
+
+/**
+ * Reference to a field of type 'PartnerType[]'
+ */
+export type ListEnumPartnerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PartnerType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PartnerLinkStatus'
+ */
+export type EnumPartnerLinkStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PartnerLinkStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'PartnerLinkStatus[]'
+ */
+export type ListEnumPartnerLinkStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PartnerLinkStatus[]'>
     
 
 
@@ -1158,6 +1367,8 @@ export type GlobalOmitConfig = {
   account?: Prisma.AccountOmit
   verification?: Prisma.VerificationOmit
   rateLimit?: Prisma.RateLimitOmit
+  partner?: Prisma.PartnerOmit
+  partnerUserLink?: Prisma.PartnerUserLinkOmit
 }
 
 /* Types for Logging */

@@ -32,6 +32,12 @@ User verification is stored exclusively in `User.emailVerifiedAt`: `null` means 
 
 OAuth is a protocol for delegated authorization. This implementation uses Better Auth's password authentication; Google/GitHub OAuth providers are not configured. Email verification and password recovery require an email provider and are not enabled.
 
+## Partners
+
+`/partners` lists the signed-in user's partners and provides creation, editing, and deletion for name, type, email, notes, and contact link. String IDs and reference numbers are generated automatically. Every read and mutation is scoped to the authenticated owner's string ID on the server; submitted owner IDs or numbers are not accepted. Optional empty fields are stored as `null`. Contact links accept HTTP/HTTPS URLs.
+
+Deletion requires confirmation in the UI and also removes an existing `PartnerUserLink` through the schema's cascade. Creating or managing user-link invitations is not part of the partner form. The existing `add_partner_structure` migration and generated Prisma models are used.
+
 ## Deployment and validation
 
 Set the three environment variables for the deployment, use an HTTPS `BETTER_AUTH_URL`, run `npm run db:deploy`, then `npm run build` and `npm start`. Keep the secret stable across instances. Better Auth uses secure cookies in production. Configure your trusted reverse proxy to overwrite client IP headers so rate limits cannot be bypassed by spoofing headers.

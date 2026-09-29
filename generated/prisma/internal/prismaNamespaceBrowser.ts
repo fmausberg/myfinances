@@ -55,7 +55,9 @@ export const ModelName = {
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
-  RateLimit: 'RateLimit'
+  RateLimit: 'RateLimit',
+  Partner: 'Partner',
+  PartnerUserLink: 'PartnerUserLink'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -145,6 +147,37 @@ export const RateLimitScalarFieldEnum = {
 } as const
 
 export type RateLimitScalarFieldEnum = (typeof RateLimitScalarFieldEnum)[keyof typeof RateLimitScalarFieldEnum]
+
+
+export const PartnerScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  type: 'type',
+  name: 'name',
+  email: 'email',
+  notes: 'notes',
+  contactLink: 'contactLink',
+  ownerId: 'ownerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PartnerScalarFieldEnum = (typeof PartnerScalarFieldEnum)[keyof typeof PartnerScalarFieldEnum]
+
+
+export const PartnerUserLinkScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  partnerId: 'partnerId',
+  linkedUserId: 'linkedUserId',
+  status: 'status',
+  acceptedAt: 'acceptedAt',
+  revokedAt: 'revokedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PartnerUserLinkScalarFieldEnum = (typeof PartnerUserLinkScalarFieldEnum)[keyof typeof PartnerUserLinkScalarFieldEnum]
 
 
 export const SortOrder = {
