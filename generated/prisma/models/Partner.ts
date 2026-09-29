@@ -258,6 +258,7 @@ export type PartnerWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Partner"> | Date | string
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   userLink?: Prisma.XOR<Prisma.PartnerUserLinkNullableScalarRelationFilter, Prisma.PartnerUserLinkWhereInput> | null
+  transactions?: Prisma.TransactionListRelationFilter
 }
 
 export type PartnerOrderByWithRelationInput = {
@@ -273,6 +274,7 @@ export type PartnerOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   owner?: Prisma.UserOrderByWithRelationInput
   userLink?: Prisma.PartnerUserLinkOrderByWithRelationInput
+  transactions?: Prisma.TransactionOrderByRelationAggregateInput
 }
 
 export type PartnerWhereUniqueInput = Prisma.AtLeast<{
@@ -291,6 +293,7 @@ export type PartnerWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Partner"> | Date | string
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   userLink?: Prisma.XOR<Prisma.PartnerUserLinkNullableScalarRelationFilter, Prisma.PartnerUserLinkWhereInput> | null
+  transactions?: Prisma.TransactionListRelationFilter
 }, "id" | "number">
 
 export type PartnerOrderByWithAggregationInput = {
@@ -339,6 +342,7 @@ export type PartnerCreateInput = {
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutOwnedPartnersInput
   userLink?: Prisma.PartnerUserLinkCreateNestedOneWithoutPartnerInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutCounterpartyInput
 }
 
 export type PartnerUncheckedCreateInput = {
@@ -353,6 +357,7 @@ export type PartnerUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   userLink?: Prisma.PartnerUserLinkUncheckedCreateNestedOneWithoutPartnerInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutCounterpartyInput
 }
 
 export type PartnerUpdateInput = {
@@ -366,6 +371,7 @@ export type PartnerUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedPartnersNestedInput
   userLink?: Prisma.PartnerUserLinkUpdateOneWithoutPartnerNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutCounterpartyNestedInput
 }
 
 export type PartnerUncheckedUpdateInput = {
@@ -380,6 +386,7 @@ export type PartnerUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userLink?: Prisma.PartnerUserLinkUncheckedUpdateOneWithoutPartnerNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutCounterpartyNestedInput
 }
 
 export type PartnerCreateManyInput = {
@@ -481,6 +488,11 @@ export type PartnerScalarRelationFilter = {
   isNot?: Prisma.PartnerWhereInput
 }
 
+export type PartnerNullableScalarRelationFilter = {
+  is?: Prisma.PartnerWhereInput | null
+  isNot?: Prisma.PartnerWhereInput | null
+}
+
 export type PartnerCreateNestedManyWithoutOwnerInput = {
   create?: Prisma.XOR<Prisma.PartnerCreateWithoutOwnerInput, Prisma.PartnerUncheckedCreateWithoutOwnerInput> | Prisma.PartnerCreateWithoutOwnerInput[] | Prisma.PartnerUncheckedCreateWithoutOwnerInput[]
   connectOrCreate?: Prisma.PartnerCreateOrConnectWithoutOwnerInput | Prisma.PartnerCreateOrConnectWithoutOwnerInput[]
@@ -541,6 +553,22 @@ export type PartnerUpdateOneRequiredWithoutUserLinkNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PartnerUpdateToOneWithWhereWithoutUserLinkInput, Prisma.PartnerUpdateWithoutUserLinkInput>, Prisma.PartnerUncheckedUpdateWithoutUserLinkInput>
 }
 
+export type PartnerCreateNestedOneWithoutTransactionsInput = {
+  create?: Prisma.XOR<Prisma.PartnerCreateWithoutTransactionsInput, Prisma.PartnerUncheckedCreateWithoutTransactionsInput>
+  connectOrCreate?: Prisma.PartnerCreateOrConnectWithoutTransactionsInput
+  connect?: Prisma.PartnerWhereUniqueInput
+}
+
+export type PartnerUpdateOneWithoutTransactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.PartnerCreateWithoutTransactionsInput, Prisma.PartnerUncheckedCreateWithoutTransactionsInput>
+  connectOrCreate?: Prisma.PartnerCreateOrConnectWithoutTransactionsInput
+  upsert?: Prisma.PartnerUpsertWithoutTransactionsInput
+  disconnect?: Prisma.PartnerWhereInput | boolean
+  delete?: Prisma.PartnerWhereInput | boolean
+  connect?: Prisma.PartnerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PartnerUpdateToOneWithWhereWithoutTransactionsInput, Prisma.PartnerUpdateWithoutTransactionsInput>, Prisma.PartnerUncheckedUpdateWithoutTransactionsInput>
+}
+
 export type PartnerCreateWithoutOwnerInput = {
   id?: string
   number?: number
@@ -552,6 +580,7 @@ export type PartnerCreateWithoutOwnerInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   userLink?: Prisma.PartnerUserLinkCreateNestedOneWithoutPartnerInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutCounterpartyInput
 }
 
 export type PartnerUncheckedCreateWithoutOwnerInput = {
@@ -565,6 +594,7 @@ export type PartnerUncheckedCreateWithoutOwnerInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   userLink?: Prisma.PartnerUserLinkUncheckedCreateNestedOneWithoutPartnerInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutCounterpartyInput
 }
 
 export type PartnerCreateOrConnectWithoutOwnerInput = {
@@ -620,6 +650,7 @@ export type PartnerCreateWithoutUserLinkInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutOwnedPartnersInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutCounterpartyInput
 }
 
 export type PartnerUncheckedCreateWithoutUserLinkInput = {
@@ -633,6 +664,7 @@ export type PartnerUncheckedCreateWithoutUserLinkInput = {
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutCounterpartyInput
 }
 
 export type PartnerCreateOrConnectWithoutUserLinkInput = {
@@ -661,6 +693,7 @@ export type PartnerUpdateWithoutUserLinkInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedPartnersNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutCounterpartyNestedInput
 }
 
 export type PartnerUncheckedUpdateWithoutUserLinkInput = {
@@ -674,6 +707,78 @@ export type PartnerUncheckedUpdateWithoutUserLinkInput = {
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutCounterpartyNestedInput
+}
+
+export type PartnerCreateWithoutTransactionsInput = {
+  id?: string
+  number?: number
+  type: $Enums.PartnerType
+  name: string
+  email?: string | null
+  notes?: string | null
+  contactLink?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owner: Prisma.UserCreateNestedOneWithoutOwnedPartnersInput
+  userLink?: Prisma.PartnerUserLinkCreateNestedOneWithoutPartnerInput
+}
+
+export type PartnerUncheckedCreateWithoutTransactionsInput = {
+  id?: string
+  number?: number
+  type: $Enums.PartnerType
+  name: string
+  email?: string | null
+  notes?: string | null
+  contactLink?: string | null
+  ownerId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userLink?: Prisma.PartnerUserLinkUncheckedCreateNestedOneWithoutPartnerInput
+}
+
+export type PartnerCreateOrConnectWithoutTransactionsInput = {
+  where: Prisma.PartnerWhereUniqueInput
+  create: Prisma.XOR<Prisma.PartnerCreateWithoutTransactionsInput, Prisma.PartnerUncheckedCreateWithoutTransactionsInput>
+}
+
+export type PartnerUpsertWithoutTransactionsInput = {
+  update: Prisma.XOR<Prisma.PartnerUpdateWithoutTransactionsInput, Prisma.PartnerUncheckedUpdateWithoutTransactionsInput>
+  create: Prisma.XOR<Prisma.PartnerCreateWithoutTransactionsInput, Prisma.PartnerUncheckedCreateWithoutTransactionsInput>
+  where?: Prisma.PartnerWhereInput
+}
+
+export type PartnerUpdateToOneWithWhereWithoutTransactionsInput = {
+  where?: Prisma.PartnerWhereInput
+  data: Prisma.XOR<Prisma.PartnerUpdateWithoutTransactionsInput, Prisma.PartnerUncheckedUpdateWithoutTransactionsInput>
+}
+
+export type PartnerUpdateWithoutTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumPartnerTypeFieldUpdateOperationsInput | $Enums.PartnerType
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedPartnersNestedInput
+  userLink?: Prisma.PartnerUserLinkUpdateOneWithoutPartnerNestedInput
+}
+
+export type PartnerUncheckedUpdateWithoutTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  number?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.EnumPartnerTypeFieldUpdateOperationsInput | $Enums.PartnerType
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userLink?: Prisma.PartnerUserLinkUncheckedUpdateOneWithoutPartnerNestedInput
 }
 
 export type PartnerCreateManyOwnerInput = {
@@ -698,6 +803,7 @@ export type PartnerUpdateWithoutOwnerInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userLink?: Prisma.PartnerUserLinkUpdateOneWithoutPartnerNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutCounterpartyNestedInput
 }
 
 export type PartnerUncheckedUpdateWithoutOwnerInput = {
@@ -711,6 +817,7 @@ export type PartnerUncheckedUpdateWithoutOwnerInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userLink?: Prisma.PartnerUserLinkUncheckedUpdateOneWithoutPartnerNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutCounterpartyNestedInput
 }
 
 export type PartnerUncheckedUpdateManyWithoutOwnerInput = {
@@ -726,6 +833,35 @@ export type PartnerUncheckedUpdateManyWithoutOwnerInput = {
 }
 
 
+/**
+ * Count Type PartnerCountOutputType
+ */
+
+export type PartnerCountOutputType = {
+  transactions: number
+}
+
+export type PartnerCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  transactions?: boolean | PartnerCountOutputTypeCountTransactionsArgs
+}
+
+/**
+ * PartnerCountOutputType without action
+ */
+export type PartnerCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PartnerCountOutputType
+   */
+  select?: Prisma.PartnerCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * PartnerCountOutputType without action
+ */
+export type PartnerCountOutputTypeCountTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TransactionWhereInput
+}
+
 
 export type PartnerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -740,6 +876,8 @@ export type PartnerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   updatedAt?: boolean
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   userLink?: boolean | Prisma.Partner$userLinkArgs<ExtArgs>
+  transactions?: boolean | Prisma.Partner$transactionsArgs<ExtArgs>
+  _count?: boolean | Prisma.PartnerCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["partner"]>
 
 export type PartnerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -787,6 +925,8 @@ export type PartnerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type PartnerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   userLink?: boolean | Prisma.Partner$userLinkArgs<ExtArgs>
+  transactions?: boolean | Prisma.Partner$transactionsArgs<ExtArgs>
+  _count?: boolean | Prisma.PartnerCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PartnerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -800,6 +940,7 @@ export type $PartnerPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     owner: Prisma.$UserPayload<ExtArgs>
     userLink: Prisma.$PartnerUserLinkPayload<ExtArgs> | null
+    transactions: Prisma.$TransactionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1208,6 +1349,7 @@ export interface Prisma__PartnerClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   owner<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   userLink<T extends Prisma.Partner$userLinkArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Partner$userLinkArgs<ExtArgs>>): Prisma.Prisma__PartnerUserLinkClient<runtime.Types.Result.GetResult<Prisma.$PartnerUserLinkPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  transactions<T extends Prisma.Partner$transactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Partner$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1664,6 +1806,30 @@ export type Partner$userLinkArgs<ExtArgs extends runtime.Types.Extensions.Intern
    */
   include?: Prisma.PartnerUserLinkInclude<ExtArgs> | null
   where?: Prisma.PartnerUserLinkWhereInput
+}
+
+/**
+ * Partner.transactions
+ */
+export type Partner$transactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Transaction
+   */
+  select?: Prisma.TransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Transaction
+   */
+  omit?: Prisma.TransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TransactionInclude<ExtArgs> | null
+  where?: Prisma.TransactionWhereInput
+  orderBy?: Prisma.TransactionOrderByWithRelationInput | Prisma.TransactionOrderByWithRelationInput[]
+  cursor?: Prisma.TransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TransactionScalarFieldEnum | Prisma.TransactionScalarFieldEnum[]
 }
 
 /**

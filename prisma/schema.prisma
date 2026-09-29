@@ -99,18 +99,19 @@ enum PartnerLinkStatus {
 }
 
 model Partner {
-  id          String           @id @default(cuid())
-  number      Int              @unique @default(autoincrement())
-  type        PartnerType
-  name        String
-  email       String?
-  notes       String?
-  contactLink String?
-  ownerId     String
-  owner       User             @relation("OwnedPartners", fields: [ownerId], references: [id], onDelete: Cascade)
-  userLink    PartnerUserLink?
-  createdAt   DateTime         @default(now())
-  updatedAt   DateTime         @updatedAt
+  id           String           @id @default(cuid())
+  number       Int              @unique @default(autoincrement())
+  type         PartnerType
+  name         String
+  email        String?
+  notes        String?
+  contactLink  String?
+  ownerId      String
+  owner        User             @relation("OwnedPartners", fields: [ownerId], references: [id], onDelete: Cascade)
+  userLink     PartnerUserLink?
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  transactions Transaction[]
 
   @@index([ownerId])
 }
@@ -156,6 +157,7 @@ model Bucket {
   bookingAccount   BookingAccount @relation(fields: [bookingAccountId], references: [id], onDelete: Restrict)
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
+  transactions     Transaction[]
 
   @@index([ownerId])
 }
@@ -205,4 +207,33 @@ model BookingAccount {
   @@index([templateId])
   @@index([ownerId, type])
   @@index([parentId])
+}
+
+enum TransactionSource {
+  MANUAL
+  FILE_IMPORT
+  API_IMPORT
+}
+
+model Transaction {
+  id               String            @id @default(cuid())
+  number           Int               @unique @default(autoincrement())
+  bucketId         String
+  bucket           Bucket            @relation(fields: [bucketId], references: [id], onDelete: Restrict)
+  amount           Decimal           @db.Decimal(19, 2)
+  occurredAt       DateTime
+  importData       Json?             @db.JsonB
+  valueDate        DateTime?
+  description      String?
+  counterpartyName String?
+  counterpartyId   String?
+  counterparty     Partner?          @relation(fields: [counterpartyId], references: [id], onDelete: SetNull)
+  reference        String?
+  source           TransactionSource @default(MANUAL)
+  externalId       String?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+
+  @@unique([bucketId, externalId])
+  @@index([bucketId, occurredAt])
 }

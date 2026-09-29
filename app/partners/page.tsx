@@ -27,6 +27,7 @@ export default async function PartnersPage() {
             <Link href="/" className="text-slate-600 hover:text-slate-900">Mein Konto</Link>
             <Link href="/partners" aria-current="page" className="font-semibold text-emerald-700">Partner</Link>
             <Link href="/booking-accounts" className="font-semibold text-emerald-700 hover:underline">Buchungskonten</Link>
+            <Link href="/buckets" className="font-semibold text-emerald-700 hover:underline">Buckets</Link>
             {user.role === "ADMIN" && <Link href="/admin/booking-account-templates" className="font-semibold text-emerald-700 hover:underline">Kontenvorlagen</Link>}
             <SignOutButton />
           </nav>

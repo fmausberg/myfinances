@@ -16,7 +16,6 @@ export function groupTemplateHierarchy<T extends HierarchyItem>(templates: T[]) 
     types: group.types.map((type) => {
       const items = templates.filter((item) => item.type === type).sort(
         (a, b) => a.position - b.position
-          || a.name.localeCompare(b.name, "de", { numeric: true })
           || a.number - b.number,
       );
       const ids = new Set(items.map((item) => item.id));

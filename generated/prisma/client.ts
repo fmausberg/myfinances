@@ -91,3 +91,8 @@ export type BookingAccountTemplate = Prisma.BookingAccountTemplateModel
  * 
  */
 export type BookingAccount = Prisma.BookingAccountModel
+/**
+ * Model Transaction
+ * 
+ */
+export type Transaction = Prisma.TransactionModel

@@ -48,3 +48,12 @@ export const BookingAccountType = {
 } as const
 
 export type BookingAccountType = (typeof BookingAccountType)[keyof typeof BookingAccountType]
+
+
+export const TransactionSource = {
+  MANUAL: 'MANUAL',
+  FILE_IMPORT: 'FILE_IMPORT',
+  API_IMPORT: 'API_IMPORT'
+} as const
+
+export type TransactionSource = (typeof TransactionSource)[keyof typeof TransactionSource]

@@ -60,7 +60,8 @@ export const ModelName = {
   PartnerUserLink: 'PartnerUserLink',
   Bucket: 'Bucket',
   BookingAccountTemplate: 'BookingAccountTemplate',
-  BookingAccount: 'BookingAccount'
+  BookingAccount: 'BookingAccount',
+  Transaction: 'Transaction'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -238,12 +239,41 @@ export const BookingAccountScalarFieldEnum = {
 export type BookingAccountScalarFieldEnum = (typeof BookingAccountScalarFieldEnum)[keyof typeof BookingAccountScalarFieldEnum]
 
 
+export const TransactionScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  bucketId: 'bucketId',
+  amount: 'amount',
+  occurredAt: 'occurredAt',
+  importData: 'importData',
+  valueDate: 'valueDate',
+  description: 'description',
+  counterpartyName: 'counterpartyName',
+  counterpartyId: 'counterpartyId',
+  reference: 'reference',
+  source: 'source',
+  externalId: 'externalId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TransactionScalarFieldEnum = (typeof TransactionScalarFieldEnum)[keyof typeof TransactionScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const QueryMode = {
@@ -260,4 +290,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

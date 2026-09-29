@@ -7,6 +7,7 @@ import { requireSession } from "@/lib/session";
 import type { ActionResult } from "@/lib/action-result";
 import { accountTreeSelect } from "@/lib/booking-account-data";
 import { allowsAccountChildren, isAccountDescendant } from "@/lib/booking-account-policy";
+import { nextPosition } from "@/lib/list-position";
 
 const path = "/booking-accounts";
 const transactionOptions = { isolationLevel: Prisma.TransactionIsolationLevel.Serializable, timeout: 30000 } as const;
@@ -115,7 +116,7 @@ export async function saveBookingAccount(id: string | null, formData: FormData):
       }
       const parentId = read("parentId");
       const parent = accounts.find((account) => account.id === parentId);
-      if (!parent || (current?.parentId !== parent.id && !allowsAccountChildren(parent.id, accounts))) {
+      if (!parent || parent.bucket || (current?.parentId !== parent.id && !allowsAccountChildren(parent.id, accounts))) {
         return { error: "Unter diesem Konto sind keine eigenen Unterkonten erlaubt. Wähle einen aktiven, freigegebenen Zweig." };
       }
       if (id && isAccountDescendant(parent.id, id, accounts)) return { error: "Ein Konto darf nicht unter sich selbst oder eines seiner Unterkonten verschoben werden." };
@@ -123,9 +124,22 @@ export async function saveBookingAccount(id: string | null, formData: FormData):
       if (current && current.type !== parent.type) return { error: "Das übergeordnete Konto muss denselben Kontotyp haben." };
       const isPostable = formData.get("isPostable") === "on";
       if (current?.bucket && !isPostable) return { error: "Ein mit einem Bucket verknüpftes Konto muss bebuchbar bleiben." };
+      if (current?.bucket) {
+        const linkedBucket = await tx.bucket.findFirst({ where: { id: current.bucket.id, ownerId: user.id, bookingAccountId: current.id } });
+        if (!linkedBucket || current.type !== "LIQUID_ASSETS" ||
+          await tx.bookingAccount.count({ where: { parentId: current.id } })) {
+          return { error: "Das Bucket-Konto ist nicht gültig oder gehört nicht zu deinem Benutzer." };
+        }
+      }
       const data = { ...common, parentId: parent.id, type: current?.type ?? parent.type, isPostable };
+      if (!current || current.parentId !== parent.id) {
+        data.position = nextPosition(accounts.filter((item) => item.parentId === parent.id && item.type === parent.type));
+      }
       if (current) await tx.bookingAccount.update({ where: { id: current.id, ownerId: user.id }, data });
       else await tx.bookingAccount.create({ data: { ...data, ownerId: user.id } });
+      if (current?.bucket) {
+        await tx.bucket.update({ where: { id: current.bucket.id, ownerId: user.id }, data: { name } });
+      }
       return { success: true };
     }, transactionOptions);
     if (result.error) return result;
@@ -133,6 +147,7 @@ export async function saveBookingAccount(id: string | null, formData: FormData):
     return failure(error);
   }
   revalidatePath(path);
+  revalidatePath("/buckets");
   return { success: true };
 }
 

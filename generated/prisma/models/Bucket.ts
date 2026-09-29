@@ -262,6 +262,7 @@ export type BucketWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Bucket"> | Date | string
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   bookingAccount?: Prisma.XOR<Prisma.BookingAccountScalarRelationFilter, Prisma.BookingAccountWhereInput>
+  transactions?: Prisma.TransactionListRelationFilter
 }
 
 export type BucketOrderByWithRelationInput = {
@@ -277,6 +278,7 @@ export type BucketOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   owner?: Prisma.UserOrderByWithRelationInput
   bookingAccount?: Prisma.BookingAccountOrderByWithRelationInput
+  transactions?: Prisma.TransactionOrderByRelationAggregateInput
 }
 
 export type BucketWhereUniqueInput = Prisma.AtLeast<{
@@ -295,6 +297,7 @@ export type BucketWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Bucket"> | Date | string
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   bookingAccount?: Prisma.XOR<Prisma.BookingAccountScalarRelationFilter, Prisma.BookingAccountWhereInput>
+  transactions?: Prisma.TransactionListRelationFilter
 }, "id" | "number" | "bookingAccountId">
 
 export type BucketOrderByWithAggregationInput = {
@@ -342,6 +345,7 @@ export type BucketCreateInput = {
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutBucketsInput
   bookingAccount: Prisma.BookingAccountCreateNestedOneWithoutBucketInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutBucketInput
 }
 
 export type BucketUncheckedCreateInput = {
@@ -355,6 +359,7 @@ export type BucketUncheckedCreateInput = {
   bookingAccountId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutBucketInput
 }
 
 export type BucketUpdateInput = {
@@ -367,6 +372,7 @@ export type BucketUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutBucketsNestedInput
   bookingAccount?: Prisma.BookingAccountUpdateOneRequiredWithoutBucketNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutBucketNestedInput
 }
 
 export type BucketUncheckedUpdateInput = {
@@ -380,6 +386,7 @@ export type BucketUncheckedUpdateInput = {
   bookingAccountId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutBucketNestedInput
 }
 
 export type BucketCreateManyInput = {
@@ -482,6 +489,11 @@ export type BucketNullableScalarRelationFilter = {
   isNot?: Prisma.BucketWhereInput | null
 }
 
+export type BucketScalarRelationFilter = {
+  is?: Prisma.BucketWhereInput
+  isNot?: Prisma.BucketWhereInput
+}
+
 export type BucketCreateNestedManyWithoutOwnerInput = {
   create?: Prisma.XOR<Prisma.BucketCreateWithoutOwnerInput, Prisma.BucketUncheckedCreateWithoutOwnerInput> | Prisma.BucketCreateWithoutOwnerInput[] | Prisma.BucketUncheckedCreateWithoutOwnerInput[]
   connectOrCreate?: Prisma.BucketCreateOrConnectWithoutOwnerInput | Prisma.BucketCreateOrConnectWithoutOwnerInput[]
@@ -556,6 +568,20 @@ export type BucketUncheckedUpdateOneWithoutBookingAccountNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BucketUpdateToOneWithWhereWithoutBookingAccountInput, Prisma.BucketUpdateWithoutBookingAccountInput>, Prisma.BucketUncheckedUpdateWithoutBookingAccountInput>
 }
 
+export type BucketCreateNestedOneWithoutTransactionsInput = {
+  create?: Prisma.XOR<Prisma.BucketCreateWithoutTransactionsInput, Prisma.BucketUncheckedCreateWithoutTransactionsInput>
+  connectOrCreate?: Prisma.BucketCreateOrConnectWithoutTransactionsInput
+  connect?: Prisma.BucketWhereUniqueInput
+}
+
+export type BucketUpdateOneRequiredWithoutTransactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.BucketCreateWithoutTransactionsInput, Prisma.BucketUncheckedCreateWithoutTransactionsInput>
+  connectOrCreate?: Prisma.BucketCreateOrConnectWithoutTransactionsInput
+  upsert?: Prisma.BucketUpsertWithoutTransactionsInput
+  connect?: Prisma.BucketWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BucketUpdateToOneWithWhereWithoutTransactionsInput, Prisma.BucketUpdateWithoutTransactionsInput>, Prisma.BucketUncheckedUpdateWithoutTransactionsInput>
+}
+
 export type BucketCreateWithoutOwnerInput = {
   id?: string
   number?: number
@@ -566,6 +592,7 @@ export type BucketCreateWithoutOwnerInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   bookingAccount: Prisma.BookingAccountCreateNestedOneWithoutBucketInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutBucketInput
 }
 
 export type BucketUncheckedCreateWithoutOwnerInput = {
@@ -578,6 +605,7 @@ export type BucketUncheckedCreateWithoutOwnerInput = {
   bookingAccountId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutBucketInput
 }
 
 export type BucketCreateOrConnectWithoutOwnerInput = {
@@ -632,6 +660,7 @@ export type BucketCreateWithoutBookingAccountInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutBucketsInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutBucketInput
 }
 
 export type BucketUncheckedCreateWithoutBookingAccountInput = {
@@ -644,6 +673,7 @@ export type BucketUncheckedCreateWithoutBookingAccountInput = {
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutBucketInput
 }
 
 export type BucketCreateOrConnectWithoutBookingAccountInput = {
@@ -671,6 +701,7 @@ export type BucketUpdateWithoutBookingAccountInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutBucketsNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutBucketNestedInput
 }
 
 export type BucketUncheckedUpdateWithoutBookingAccountInput = {
@@ -681,6 +712,74 @@ export type BucketUncheckedUpdateWithoutBookingAccountInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   position?: Prisma.IntFieldUpdateOperationsInput | number
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutBucketNestedInput
+}
+
+export type BucketCreateWithoutTransactionsInput = {
+  id?: string
+  number?: number
+  name: string
+  currency?: string
+  notes?: string | null
+  position?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owner: Prisma.UserCreateNestedOneWithoutBucketsInput
+  bookingAccount: Prisma.BookingAccountCreateNestedOneWithoutBucketInput
+}
+
+export type BucketUncheckedCreateWithoutTransactionsInput = {
+  id?: string
+  number?: number
+  name: string
+  currency?: string
+  notes?: string | null
+  position?: number
+  ownerId: string
+  bookingAccountId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type BucketCreateOrConnectWithoutTransactionsInput = {
+  where: Prisma.BucketWhereUniqueInput
+  create: Prisma.XOR<Prisma.BucketCreateWithoutTransactionsInput, Prisma.BucketUncheckedCreateWithoutTransactionsInput>
+}
+
+export type BucketUpsertWithoutTransactionsInput = {
+  update: Prisma.XOR<Prisma.BucketUpdateWithoutTransactionsInput, Prisma.BucketUncheckedUpdateWithoutTransactionsInput>
+  create: Prisma.XOR<Prisma.BucketCreateWithoutTransactionsInput, Prisma.BucketUncheckedCreateWithoutTransactionsInput>
+  where?: Prisma.BucketWhereInput
+}
+
+export type BucketUpdateToOneWithWhereWithoutTransactionsInput = {
+  where?: Prisma.BucketWhereInput
+  data: Prisma.XOR<Prisma.BucketUpdateWithoutTransactionsInput, Prisma.BucketUncheckedUpdateWithoutTransactionsInput>
+}
+
+export type BucketUpdateWithoutTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owner?: Prisma.UserUpdateOneRequiredWithoutBucketsNestedInput
+  bookingAccount?: Prisma.BookingAccountUpdateOneRequiredWithoutBucketNestedInput
+}
+
+export type BucketUncheckedUpdateWithoutTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  number?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  position?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  bookingAccountId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -706,6 +805,7 @@ export type BucketUpdateWithoutOwnerInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bookingAccount?: Prisma.BookingAccountUpdateOneRequiredWithoutBucketNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutBucketNestedInput
 }
 
 export type BucketUncheckedUpdateWithoutOwnerInput = {
@@ -718,6 +818,7 @@ export type BucketUncheckedUpdateWithoutOwnerInput = {
   bookingAccountId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutBucketNestedInput
 }
 
 export type BucketUncheckedUpdateManyWithoutOwnerInput = {
@@ -733,6 +834,35 @@ export type BucketUncheckedUpdateManyWithoutOwnerInput = {
 }
 
 
+/**
+ * Count Type BucketCountOutputType
+ */
+
+export type BucketCountOutputType = {
+  transactions: number
+}
+
+export type BucketCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  transactions?: boolean | BucketCountOutputTypeCountTransactionsArgs
+}
+
+/**
+ * BucketCountOutputType without action
+ */
+export type BucketCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BucketCountOutputType
+   */
+  select?: Prisma.BucketCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * BucketCountOutputType without action
+ */
+export type BucketCountOutputTypeCountTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TransactionWhereInput
+}
+
 
 export type BucketSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -747,6 +877,8 @@ export type BucketSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   updatedAt?: boolean
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   bookingAccount?: boolean | Prisma.BookingAccountDefaultArgs<ExtArgs>
+  transactions?: boolean | Prisma.Bucket$transactionsArgs<ExtArgs>
+  _count?: boolean | Prisma.BucketCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["bucket"]>
 
 export type BucketSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -796,6 +928,8 @@ export type BucketOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type BucketInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   bookingAccount?: boolean | Prisma.BookingAccountDefaultArgs<ExtArgs>
+  transactions?: boolean | Prisma.Bucket$transactionsArgs<ExtArgs>
+  _count?: boolean | Prisma.BucketCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BucketIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -811,6 +945,7 @@ export type $BucketPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   objects: {
     owner: Prisma.$UserPayload<ExtArgs>
     bookingAccount: Prisma.$BookingAccountPayload<ExtArgs>
+    transactions: Prisma.$TransactionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1219,6 +1354,7 @@ export interface Prisma__BucketClient<T, Null = never, ExtArgs extends runtime.T
   readonly [Symbol.toStringTag]: "PrismaPromise"
   owner<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   bookingAccount<T extends Prisma.BookingAccountDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BookingAccountDefaultArgs<ExtArgs>>): Prisma.Prisma__BookingAccountClient<runtime.Types.Result.GetResult<Prisma.$BookingAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  transactions<T extends Prisma.Bucket$transactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Bucket$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1656,6 +1792,30 @@ export type BucketDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Limit how many Buckets to delete.
    */
   limit?: number
+}
+
+/**
+ * Bucket.transactions
+ */
+export type Bucket$transactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Transaction
+   */
+  select?: Prisma.TransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Transaction
+   */
+  omit?: Prisma.TransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TransactionInclude<ExtArgs> | null
+  where?: Prisma.TransactionWhereInput
+  orderBy?: Prisma.TransactionOrderByWithRelationInput | Prisma.TransactionOrderByWithRelationInput[]
+  cursor?: Prisma.TransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TransactionScalarFieldEnum | Prisma.TransactionScalarFieldEnum[]
 }
 
 /**

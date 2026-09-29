@@ -27,7 +27,7 @@ function AccountForm({ editor, accounts, onSaved, onCancel }: {
     .filter(({ template: candidate }) =>
       (!account || candidate.type === account.type) &&
       (!account || !isAccountDescendant(candidate.id, account.id, accounts)) &&
-      (candidate.id === account?.parentId || allowsAccountChildren(candidate.id, accounts)),
+      !candidate.bucket && (candidate.id === account?.parentId || allowsAccountChildren(candidate.id, accounts)),
     );
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -48,14 +48,15 @@ function AccountForm({ editor, accounts, onSaved, onCancel }: {
     <section className="mt-6 rounded-xl border border-emerald-200 bg-white p-6 shadow-sm" aria-labelledby={prefix + "-heading"}>
       <h2 id={prefix + "-heading"} className="text-lg font-semibold">{account ? "Buchungskonto bearbeiten" : "Eigenes Unterkonto anlegen"}</h2>
       {fromTemplate && <p className="mt-2 text-sm text-slate-500">Name, Beschreibung, Position und Archivierung gelten nur für deinen Kontenbaum. Struktur, Kontotyp und Bebuchbarkeit stammen aus dem Vorlagen-Setup.</p>}
+      {account?.bucket && <p className="mt-2 text-sm text-slate-500">Name und Archivierung gelten auch für den verknüpften Bucket. Seine Reihenfolge bleibt unabhängig.</p>}
       <form onSubmit={submit} aria-busy={pending} className="mt-5">
         <fieldset disabled={pending} className="space-y-5 disabled:opacity-60">
           <div className="grid gap-5 sm:grid-cols-2">
             <div><label htmlFor={prefix + "-name"} className="text-sm font-medium">Name *</label><input id={prefix + "-name"} name="name" required defaultValue={account?.name ?? ""} className={inputClass} autoFocus /></div>
             <div>
               <label htmlFor={prefix + "-position"} className="text-sm font-medium">Position</label>
-              <input id={prefix + "-position"} name="position" type="number" step={1} min={-2147483648} max={2147483647} required defaultValue={account?.position ?? 0} className={inputClass} />
-              <p className="mt-1 text-xs text-slate-500">Kleinere Werte stehen auf derselben Ebene weiter oben.</p>
+              {account ? <input id={prefix + "-position"} name="position" type="number" step={1} min={-2147483648} max={2147483647} required defaultValue={account.position} className={inputClass} /> : <input type="hidden" name="position" value="0" />}
+              <p className="mt-1 text-xs text-slate-500">{account ? "Kleinere Werte stehen auf derselben Ebene weiter oben. Beim Verschieben in eine andere Gruppe wird das Konto hinten angefügt." : "Neue Konten werden am Ende der gewählten Gruppe angefügt."}</p>
             </div>
             {!fromTemplate && <div>
               <label htmlFor={prefix + "-parent"} className="text-sm font-medium">Übergeordnetes Konto *</label>
@@ -69,7 +70,7 @@ function AccountForm({ editor, accounts, onSaved, onCancel }: {
           <div><label htmlFor={prefix + "-description"} className="text-sm font-medium">Beschreibung</label><textarea id={prefix + "-description"} name="description" rows={3} defaultValue={account?.description ?? ""} className={inputClass} /></div>
           <div className="flex flex-wrap gap-5 text-sm">
             <label className="flex items-center gap-2"><input name="isArchived" type="checkbox" defaultChecked={account?.isArchived ?? false} className="accent-emerald-700" />Archiviert</label>
-            {fromTemplate
+            {account?.bucket ? <><input type="hidden" name="isPostable" value="on" /><span className="text-slate-500">Bebuchbar (Bucket-Konto)</span></> : fromTemplate
               ? <span className="text-slate-500">{account?.isPostable ? "Bebuchbar" : "Nicht bebuchbar (Strukturkonto)"}</span>
               : <label className="flex items-center gap-2"><input name="isPostable" type="checkbox" defaultChecked={account?.isPostable ?? true} className="accent-emerald-700" />Bebuchbar</label>}
           </div>

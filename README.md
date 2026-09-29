@@ -48,7 +48,7 @@ Template codes remain unique, circular parent relationships are rejected in a se
 
 The internal template code is not exposed in the UI or sent to the client. Each create/update assigns it from the trimmed name on the server; duplicate names are reported as a name conflict.
 
-Templates expose `position` in the create/edit form (default `0`, validated as a PostgreSQL signed integer). Both the table and parent selector preserve statement/type grouping and parent-child hierarchy, ordering siblings by ascending position, then name and number. `Bucket` also has `position` in Prisma; it currently has no application CRUD or list screen.
+Templates expose `position` in the create/edit form (default `0`, validated as a PostgreSQL signed integer). Both the table and parent selector preserve statement/type grouping and parent-child hierarchy, ordering siblings by ascending position, then number.
 
 ## Personal booking account tree
 
@@ -60,11 +60,25 @@ Custom accounts must be attached to an active branch whose nearest template ance
 
 Only custom leaf accounts without a bucket can be deleted. Every structural change is checked again in a serializable transaction. IDs, template links, ownership, and account types cannot be supplied or changed through the user form.
 
+## Buckets
+
+`/buckets` lists the authenticated user's buckets, ordered by `position` then `number`. Create either a new personal liquid-asset account and its bucket together, or attach an existing owned, active, postable, personal leaf account with no bucket. Existing account data and position are preserved when linking. New buckets and new accounts append to their respective lists; bucket ordering never changes account ordering.
+
+The up/down controls submit the complete owner bucket list. The server rejects duplicate IDs, missing entries, foreign IDs, or invalid linked account structures and updates positions in one serializable transaction. Concurrent assignment conflicts on `bookingAccountId` produce a recoverable error.
+
+Bucket and account names are updated together, including edits from the account screen. Notes and currency are editable in the bucket form; currencies must match `[A-Z]{3}`. Since Bucket has no archive field, its account's `isArchived` is the single shared archive state. Bucket accounts cannot have children; creation/moving under them is blocked in both forms and server mutations.
+
+Deletion explicitly confirms removal of the bucket AND its personal account (also for previously existing accounts). Ownership, type, posting flag and leaf status are checked before deleting both in one transaction; foreign-key restrictions roll back the whole operation.
+
+There are currently no financial-entry, booking, or balance models. No balances are displayed, and no such models were added. Before introducing financial entries, add dependency checks in the bucket service to block currency changes and deletion when entries exist; do not add cascading deletion of financial history.
+
 ## Deployment and validation
 
 Set the three environment variables for the deployment, use an HTTPS `BETTER_AUTH_URL`, run `npm run db:deploy`, then `npm run build` and `npm start`. Keep the secret stable across instances. Better Auth uses secure cookies in production. Configure your trusted reverse proxy to overwrite client IP headers so rate limits cannot be bypassed by spoofing headers.
 
 Do not run tests, lint checks, or builds after changes unless explicitly requested.
 With the app running, `npm run test:auth` tests registration, password hashing, duplicate/invalid credentials, session protection, origin rejection, rate limiting, and logout against the configured database; it removes its own test user afterward. Run only against a development/test database.
+
+`npm run test:buckets` runs database integration checks for both creation modes, independent positions, permissions, invalid inputs, foreign ownership, editing/archiving, deletion, and concurrent account assignment. It creates isolated fixture users/accounts/templates and removes them afterward; use a development/test database.
 
 Integration follows the [Better Auth Prisma adapter](https://better-auth.com/docs/adapters/prisma) and [Next.js integration](https://better-auth.com/docs/integrations/next) documentation.

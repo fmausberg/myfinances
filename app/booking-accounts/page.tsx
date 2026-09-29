@@ -12,7 +12,7 @@ export default async function BookingAccountsPage() {
   const { user } = await requireSession();
   const accounts = await prisma.bookingAccount.findMany({
     where: { ownerId: user.id },
-    orderBy: [{ position: "asc" }, { name: "asc" }, { number: "asc" }],
+    orderBy: [{ position: "asc" }, { number: "asc" }],
     select: accountTreeSelect,
   });
   return (
@@ -23,6 +23,7 @@ export default async function BookingAccountsPage() {
           <nav aria-label="Hauptnavigation" className="flex flex-wrap items-center gap-5 text-sm">
             <Link href="/">Mein Konto</Link>
             <Link href="/partners">Partner</Link>
+            <Link href="/buckets">Buckets</Link>
             <Link href="/booking-accounts" aria-current="page" className="font-semibold text-emerald-700">Buchungskonten</Link>
             {user.role === "ADMIN" && <Link href="/admin/booking-account-templates" className="text-emerald-700">Kontenvorlagen</Link>}
             <SignOutButton />

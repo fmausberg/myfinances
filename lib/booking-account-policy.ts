@@ -13,9 +13,10 @@ export function allowsAccountChildren(accountId: string, accounts: AccountTreeIt
   const byId = new Map(accounts.map((account) => [account.id, account]));
   const seen = new Set<string>();
   let current = byId.get(accountId);
+  const type = current?.type;
   let permitted: boolean | undefined;
   while (current) {
-    if (seen.has(current.id) || current.isArchived || current.template?.isArchived) return false;
+    if (seen.has(current.id) || current.type !== type || current.bucket || current.isArchived || current.template?.isArchived) return false;
     seen.add(current.id);
     if (current.templateId) {
       if (!current.template) return false;
