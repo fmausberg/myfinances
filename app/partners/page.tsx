@@ -23,9 +23,11 @@ export default async function PartnersPage() {
       <div className="mx-auto max-w-4xl">
         <header className="flex flex-wrap items-center justify-between gap-4">
           <Link href="/" className="text-xl font-bold tracking-tight">My Finances</Link>
-          <nav aria-label="Hauptnavigation" className="flex items-center gap-5 text-sm">
+          <nav aria-label="Hauptnavigation" className="flex flex-wrap items-center gap-5 text-sm">
             <Link href="/" className="text-slate-600 hover:text-slate-900">Mein Konto</Link>
             <Link href="/partners" aria-current="page" className="font-semibold text-emerald-700">Partner</Link>
+            <Link href="/booking-accounts" className="font-semibold text-emerald-700 hover:underline">Buchungskonten</Link>
+            {user.role === "ADMIN" && <Link href="/admin/booking-account-templates" className="font-semibold text-emerald-700 hover:underline">Kontenvorlagen</Link>}
             <SignOutButton />
           </nav>
         </header>

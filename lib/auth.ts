@@ -26,7 +26,17 @@ export const auth = betterAuth({
   // Let Prisma apply @default(cuid()) for all authentication models.
   advanced: { database: { generateId: false } },
   plugins: [emailVerificationTimestamp],
-  user: { additionalFields: { number: numberField } },
+  user: {
+    additionalFields: {
+      number: numberField,
+      role: {
+        type: ["USER", "ADMIN"],
+        required: false,
+        defaultValue: "USER",
+        input: false,
+      },
+    },
+  },
   account: { additionalFields: { number: numberField } },
   verification: { additionalFields: { number: numberField } },
   emailAndPassword: {

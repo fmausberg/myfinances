@@ -14,6 +14,7 @@ export async function getSession() {
     select: {
       id: true,
       number: true,
+      role: true,
       name: true,
       email: true,
       emailVerifiedAt: true,
@@ -28,5 +29,12 @@ export async function getSession() {
 export async function requireSession() {
   const session = await getSession();
   if (!session) redirect("/login");
+  return session;
+}
+
+export async function requireAdmin() {
+  // getSession reads the current role from Prisma on every request.
+  const session = await requireSession();
+  if (session.user.role !== "ADMIN") redirect("/");
   return session;
 }

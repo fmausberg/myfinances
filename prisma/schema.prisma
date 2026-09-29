@@ -7,6 +7,11 @@ datasource db {
   provider = "postgresql"
 }
 
+enum UserRole {
+  USER
+  ADMIN
+}
+
 model User {
   id                   String            @id @default(cuid())
   number               Int               @unique @default(autoincrement())
@@ -14,12 +19,15 @@ model User {
   email                String            @unique
   emailVerifiedAt      DateTime?
   image                String?
-  createdAt            DateTime          @default(now())
-  updatedAt            DateTime          @updatedAt
+  role                 UserRole          @default(USER)
   sessions             Session[]
   accounts             Account[]
   ownedPartners        Partner[]         @relation("OwnedPartners")
   receivedPartnerLinks PartnerUserLink[] @relation("ReceivedPartnerLinks")
+  buckets              Bucket[]
+  bookingAccounts      BookingAccount[]
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
 }
 
 model Session {
@@ -50,7 +58,6 @@ model Account {
   accessTokenExpiresAt  DateTime?
   refreshTokenExpiresAt DateTime?
   scope                 String?
-  // Salted password hash for the user's credential account, never plaintext.
   password              String?
   createdAt             DateTime  @default(now())
   updatedAt             DateTime  @updatedAt
@@ -92,39 +99,110 @@ enum PartnerLinkStatus {
 }
 
 model Partner {
-  id          String      @id @default(cuid())
-  number      Int         @unique @default(autoincrement())
+  id          String           @id @default(cuid())
+  number      Int              @unique @default(autoincrement())
   type        PartnerType
   name        String
   email       String?
   notes       String?
   contactLink String?
-
-  ownerId String
-  owner   User   @relation("OwnedPartners", fields: [ownerId], references: [id], onDelete: Cascade)
-
-  userLink PartnerUserLink?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  ownerId     String
+  owner       User             @relation("OwnedPartners", fields: [ownerId], references: [id], onDelete: Cascade)
+  userLink    PartnerUserLink?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
 
   @@index([ownerId])
 }
 
 model PartnerUserLink {
-  id           String  @id @default(cuid())
-  number       Int     @unique @default(autoincrement())
-  partnerId    String  @unique
-  partner      Partner @relation(fields: [partnerId], references: [id], onDelete: Cascade)
+  id           String            @id @default(cuid())
+  number       Int               @unique @default(autoincrement())
+  partnerId    String            @unique
+  partner      Partner           @relation(fields: [partnerId], references: [id], onDelete: Cascade)
   linkedUserId String
-  linkedUser   User    @relation("ReceivedPartnerLinks", fields: [linkedUserId], references: [id], onDelete: Cascade)
-
-  status     PartnerLinkStatus @default(PENDING)
-  acceptedAt DateTime?
-  revokedAt  DateTime?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  linkedUser   User              @relation("ReceivedPartnerLinks", fields: [linkedUserId], references: [id], onDelete: Cascade)
+  status       PartnerLinkStatus @default(PENDING)
+  acceptedAt   DateTime?
+  revokedAt    DateTime?
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
 
   @@index([linkedUserId, status])
+}
+
+enum BookingAccountType {
+  LIQUID_ASSETS
+  RECEIVABLES
+  PREPAYMENTS
+  OTHER_CURRENT_ASSETS
+  NON_CURRENT_ASSETS
+  LIABILITIES
+  EQUITY
+  INCOME
+  EXPENSES
+}
+
+model Bucket {
+  id               String         @id @default(cuid())
+  number           Int            @unique @default(autoincrement())
+  name             String
+  currency         String         @default("EUR") @db.VarChar(3)
+  notes            String?
+  position         Int            @default(0)
+  ownerId          String
+  owner            User           @relation(fields: [ownerId], references: [id], onDelete: Restrict)
+  bookingAccountId String         @unique
+  bookingAccount   BookingAccount @relation(fields: [bookingAccountId], references: [id], onDelete: Restrict)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@index([ownerId])
+}
+
+model BookingAccountTemplate {
+  id                   String                   @id @default(cuid())
+  number               Int                      @unique @default(autoincrement())
+  code                 String                   @unique
+  name                 String
+  description          String?
+  type                 BookingAccountType
+  isArchived           Boolean                  @default(false)
+  isPostable           Boolean                  @default(true)
+  allowsCustomChildren Boolean                  @default(false)
+  position             Int                      @default(0)
+  parentId             String?
+  parent               BookingAccountTemplate?  @relation("BookingAccountTemplateHierarchy", fields: [parentId], references: [id], onDelete: Restrict)
+  children             BookingAccountTemplate[] @relation("BookingAccountTemplateHierarchy")
+  bookingAccounts      BookingAccount[]
+  createdAt            DateTime                 @default(now())
+  updatedAt            DateTime                 @updatedAt
+
+  @@index([parentId])
+}
+
+model BookingAccount {
+  id          String                  @id @default(cuid())
+  number      Int                     @unique @default(autoincrement())
+  name        String
+  type        BookingAccountType
+  description String?
+  isArchived  Boolean                 @default(false)
+  isPostable  Boolean                 @default(true)
+  position    Int                     @default(0)
+  ownerId     String
+  owner       User                    @relation(fields: [ownerId], references: [id], onDelete: Restrict)
+  templateId  String?
+  template    BookingAccountTemplate? @relation(fields: [templateId], references: [id], onDelete: Restrict)
+  parentId    String?
+  parent      BookingAccount?         @relation("BookingAccountHierarchy", fields: [parentId], references: [id], onDelete: Restrict)
+  children    BookingAccount[]        @relation("BookingAccountHierarchy")
+  bucket      Bucket?
+  createdAt   DateTime                @default(now())
+  updatedAt   DateTime                @updatedAt
+
+  @@unique([ownerId, templateId])
+  @@index([templateId])
+  @@index([ownerId, type])
+  @@index([parentId])
 }

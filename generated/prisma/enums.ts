@@ -9,6 +9,14 @@
 * 🟢 You can import this file directly.
 */
 
+export const UserRole = {
+  USER: 'USER',
+  ADMIN: 'ADMIN'
+} as const
+
+export type UserRole = (typeof UserRole)[keyof typeof UserRole]
+
+
 export const PartnerType = {
   NATURAL_PERSON: 'NATURAL_PERSON',
   LEGAL_ENTITY: 'LEGAL_ENTITY'
@@ -25,3 +33,18 @@ export const PartnerLinkStatus = {
 } as const
 
 export type PartnerLinkStatus = (typeof PartnerLinkStatus)[keyof typeof PartnerLinkStatus]
+
+
+export const BookingAccountType = {
+  LIQUID_ASSETS: 'LIQUID_ASSETS',
+  RECEIVABLES: 'RECEIVABLES',
+  PREPAYMENTS: 'PREPAYMENTS',
+  OTHER_CURRENT_ASSETS: 'OTHER_CURRENT_ASSETS',
+  NON_CURRENT_ASSETS: 'NON_CURRENT_ASSETS',
+  LIABILITIES: 'LIABILITIES',
+  EQUITY: 'EQUITY',
+  INCOME: 'INCOME',
+  EXPENSES: 'EXPENSES'
+} as const
+
+export type BookingAccountType = (typeof BookingAccountType)[keyof typeof BookingAccountType]

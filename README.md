@@ -38,6 +38,28 @@ OAuth is a protocol for delegated authorization. This implementation uses Better
 
 Deletion requires confirmation in the UI and also removes an existing `PartnerUserLink` through the schema's cascade. Creating or managing user-link invitations is not part of the partner form. The existing `add_partner_structure` migration and generated Prisma models are used.
 
+## Admin booking account templates
+
+`/admin/booking-account-templates` provides CRUD for all template fields, including parent selection and archive/posting/custom-child flags. Only users whose current database role is `ADMIN` can read this page or execute its server actions. Navigation is also hidden for ordinary users. Role changes take effect on the next request; authorization does not rely on a role cached in the browser.
+
+Registration assigns `USER`, and the role field cannot be supplied through public auth forms/API input. Grant the first administrator role explicitly through trusted database administration (for example Prisma Studio); no account is automatically promoted.
+
+Template codes remain unique, circular parent relationships are rejected in a serializable transaction, and database restrictions prevent deleting referenced templates. Such templates can be archived instead. Template changes do not rewrite existing user booking accounts.
+
+The internal template code is not exposed in the UI or sent to the client. Each create/update assigns it from the trimmed name on the server; duplicate names are reported as a name conflict.
+
+Templates expose `position` in the create/edit form (default `0`, validated as a PostgreSQL signed integer). Both the table and parent selector preserve statement/type grouping and parent-child hierarchy, ordering siblings by ascending position, then name and number. `Bucket` also has `position` in Prisma; it currently has no application CRUD or list screen.
+
+## Personal booking account tree
+
+`/booking-accounts` is scoped to the signed-in owner on every read and mutation. An empty tree offers an initialization button. Initialization copies active template branches, including their hierarchy, names, descriptions, types, posting flags, and positions, in one serializable transaction. Archived templates and their descendants are excluded. Invalid template trees produce an error without partial inserts. Existing accounts are never overwritten or supplemented by repeating initialization.
+
+Users can change names, descriptions, positions, and archive flags on their own accounts. Template-backed accounts retain their template link, parent, type, and posting flag and cannot be deleted. Template edits do not automatically rewrite the personal snapshot.
+
+Custom accounts must be attached to an active branch whose nearest template ancestor currently allows custom children. This permission is inherited through custom descendants; archived ancestors block additions and moves into the branch. Custom accounts inherit the parent's type on creation and can only move under a same-type account without creating a cycle. Existing custom accounts can still be edited or archived in place if the branch is subsequently locked. Posting flags are editable on custom accounts, except that bucket-linked accounts must remain postable.
+
+Only custom leaf accounts without a bucket can be deleted. Every structural change is checked again in a serializable transaction. IDs, template links, ownership, and account types cannot be supplied or changed through the user form.
+
 ## Deployment and validation
 
 Set the three environment variables for the deployment, use an HTTPS `BETTER_AUTH_URL`, run `npm run db:deploy`, then `npm run build` and `npm start`. Keep the secret stable across instances. Better Auth uses secure cookies in production. Configure your trusted reverse proxy to overwrite client IP headers so rate limits cannot be bypassed by spoofing headers.

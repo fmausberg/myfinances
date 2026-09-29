@@ -57,7 +57,10 @@ export const ModelName = {
   Verification: 'Verification',
   RateLimit: 'RateLimit',
   Partner: 'Partner',
-  PartnerUserLink: 'PartnerUserLink'
+  PartnerUserLink: 'PartnerUserLink',
+  Bucket: 'Bucket',
+  BookingAccountTemplate: 'BookingAccountTemplate',
+  BookingAccount: 'BookingAccount'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -83,6 +86,7 @@ export const UserScalarFieldEnum = {
   email: 'email',
   emailVerifiedAt: 'emailVerifiedAt',
   image: 'image',
+  role: 'role',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -178,6 +182,60 @@ export const PartnerUserLinkScalarFieldEnum = {
 } as const
 
 export type PartnerUserLinkScalarFieldEnum = (typeof PartnerUserLinkScalarFieldEnum)[keyof typeof PartnerUserLinkScalarFieldEnum]
+
+
+export const BucketScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  name: 'name',
+  currency: 'currency',
+  notes: 'notes',
+  position: 'position',
+  ownerId: 'ownerId',
+  bookingAccountId: 'bookingAccountId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BucketScalarFieldEnum = (typeof BucketScalarFieldEnum)[keyof typeof BucketScalarFieldEnum]
+
+
+export const BookingAccountTemplateScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  code: 'code',
+  name: 'name',
+  description: 'description',
+  type: 'type',
+  isArchived: 'isArchived',
+  isPostable: 'isPostable',
+  allowsCustomChildren: 'allowsCustomChildren',
+  position: 'position',
+  parentId: 'parentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BookingAccountTemplateScalarFieldEnum = (typeof BookingAccountTemplateScalarFieldEnum)[keyof typeof BookingAccountTemplateScalarFieldEnum]
+
+
+export const BookingAccountScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  name: 'name',
+  type: 'type',
+  description: 'description',
+  isArchived: 'isArchived',
+  isPostable: 'isPostable',
+  position: 'position',
+  ownerId: 'ownerId',
+  templateId: 'templateId',
+  parentId: 'parentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BookingAccountScalarFieldEnum = (typeof BookingAccountScalarFieldEnum)[keyof typeof BookingAccountScalarFieldEnum]
 
 
 export const SortOrder = {

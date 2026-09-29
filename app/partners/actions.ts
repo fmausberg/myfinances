@@ -4,8 +4,9 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { requireSession } from "@/lib/session";
 import type { Partner } from "@/generated/prisma/client";
+import type { ActionResult } from "@/lib/action-result";
 
-export async function savePartner(id: string | null, formData: FormData) {
+export async function savePartner(id: string | null, formData: FormData): Promise<ActionResult> {
   const { user } = await requireSession();
   if (id !== null && (typeof id !== "string" || !id)) {
     return { error: "Ungültiger Partner." };
@@ -58,7 +59,7 @@ export async function savePartner(id: string | null, formData: FormData) {
   return { success: true } as const;
 }
 
-export async function deletePartner(id: string) {
+export async function deletePartner(id: string): Promise<ActionResult> {
   const { user } = await requireSession();
   if (typeof id !== "string" || !id) return { error: "Ungültiger Partner." };
   try {

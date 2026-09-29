@@ -403,7 +403,10 @@ export const ModelName = {
   Verification: 'Verification',
   RateLimit: 'RateLimit',
   Partner: 'Partner',
-  PartnerUserLink: 'PartnerUserLink'
+  PartnerUserLink: 'PartnerUserLink',
+  Bucket: 'Bucket',
+  BookingAccountTemplate: 'BookingAccountTemplate',
+  BookingAccount: 'BookingAccount'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -419,7 +422,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "rateLimit" | "partner" | "partnerUserLink"
+    modelProps: "user" | "session" | "account" | "verification" | "rateLimit" | "partner" | "partnerUserLink" | "bucket" | "bookingAccountTemplate" | "bookingAccount"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -941,6 +944,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Bucket: {
+      payload: Prisma.$BucketPayload<ExtArgs>
+      fields: Prisma.BucketFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BucketFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BucketPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BucketFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BucketPayload>
+        }
+        findFirst: {
+          args: Prisma.BucketFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BucketPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BucketFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BucketPayload>
+        }
+        findMany: {
+          args: Prisma.BucketFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BucketPayload>[]
+        }
+        create: {
+          args: Prisma.BucketCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BucketPayload>
+        }
+        createMany: {
+          args: Prisma.BucketCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BucketCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BucketPayload>[]
+        }
+        delete: {
+          args: Prisma.BucketDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BucketPayload>
+        }
+        update: {
+          args: Prisma.BucketUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BucketPayload>
+        }
+        deleteMany: {
+          args: Prisma.BucketDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BucketUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BucketUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BucketPayload>[]
+        }
+        upsert: {
+          args: Prisma.BucketUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BucketPayload>
+        }
+        aggregate: {
+          args: Prisma.BucketAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBucket>
+        }
+        groupBy: {
+          args: Prisma.BucketGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BucketGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BucketCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BucketCountAggregateOutputType> | number
+        }
+      }
+    }
+    BookingAccountTemplate: {
+      payload: Prisma.$BookingAccountTemplatePayload<ExtArgs>
+      fields: Prisma.BookingAccountTemplateFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BookingAccountTemplateFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingAccountTemplatePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BookingAccountTemplateFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingAccountTemplatePayload>
+        }
+        findFirst: {
+          args: Prisma.BookingAccountTemplateFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingAccountTemplatePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BookingAccountTemplateFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingAccountTemplatePayload>
+        }
+        findMany: {
+          args: Prisma.BookingAccountTemplateFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingAccountTemplatePayload>[]
+        }
+        create: {
+          args: Prisma.BookingAccountTemplateCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingAccountTemplatePayload>
+        }
+        createMany: {
+          args: Prisma.BookingAccountTemplateCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BookingAccountTemplateCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingAccountTemplatePayload>[]
+        }
+        delete: {
+          args: Prisma.BookingAccountTemplateDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingAccountTemplatePayload>
+        }
+        update: {
+          args: Prisma.BookingAccountTemplateUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingAccountTemplatePayload>
+        }
+        deleteMany: {
+          args: Prisma.BookingAccountTemplateDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BookingAccountTemplateUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BookingAccountTemplateUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingAccountTemplatePayload>[]
+        }
+        upsert: {
+          args: Prisma.BookingAccountTemplateUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingAccountTemplatePayload>
+        }
+        aggregate: {
+          args: Prisma.BookingAccountTemplateAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBookingAccountTemplate>
+        }
+        groupBy: {
+          args: Prisma.BookingAccountTemplateGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BookingAccountTemplateGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BookingAccountTemplateCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BookingAccountTemplateCountAggregateOutputType> | number
+        }
+      }
+    }
+    BookingAccount: {
+      payload: Prisma.$BookingAccountPayload<ExtArgs>
+      fields: Prisma.BookingAccountFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BookingAccountFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingAccountPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BookingAccountFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingAccountPayload>
+        }
+        findFirst: {
+          args: Prisma.BookingAccountFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingAccountPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BookingAccountFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingAccountPayload>
+        }
+        findMany: {
+          args: Prisma.BookingAccountFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingAccountPayload>[]
+        }
+        create: {
+          args: Prisma.BookingAccountCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingAccountPayload>
+        }
+        createMany: {
+          args: Prisma.BookingAccountCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BookingAccountCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingAccountPayload>[]
+        }
+        delete: {
+          args: Prisma.BookingAccountDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingAccountPayload>
+        }
+        update: {
+          args: Prisma.BookingAccountUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingAccountPayload>
+        }
+        deleteMany: {
+          args: Prisma.BookingAccountDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BookingAccountUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BookingAccountUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingAccountPayload>[]
+        }
+        upsert: {
+          args: Prisma.BookingAccountUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingAccountPayload>
+        }
+        aggregate: {
+          args: Prisma.BookingAccountAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBookingAccount>
+        }
+        groupBy: {
+          args: Prisma.BookingAccountGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BookingAccountGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BookingAccountCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BookingAccountCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -987,6 +1212,7 @@ export const UserScalarFieldEnum = {
   email: 'email',
   emailVerifiedAt: 'emailVerifiedAt',
   image: 'image',
+  role: 'role',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1084,6 +1310,60 @@ export const PartnerUserLinkScalarFieldEnum = {
 export type PartnerUserLinkScalarFieldEnum = (typeof PartnerUserLinkScalarFieldEnum)[keyof typeof PartnerUserLinkScalarFieldEnum]
 
 
+export const BucketScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  name: 'name',
+  currency: 'currency',
+  notes: 'notes',
+  position: 'position',
+  ownerId: 'ownerId',
+  bookingAccountId: 'bookingAccountId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BucketScalarFieldEnum = (typeof BucketScalarFieldEnum)[keyof typeof BucketScalarFieldEnum]
+
+
+export const BookingAccountTemplateScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  code: 'code',
+  name: 'name',
+  description: 'description',
+  type: 'type',
+  isArchived: 'isArchived',
+  isPostable: 'isPostable',
+  allowsCustomChildren: 'allowsCustomChildren',
+  position: 'position',
+  parentId: 'parentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BookingAccountTemplateScalarFieldEnum = (typeof BookingAccountTemplateScalarFieldEnum)[keyof typeof BookingAccountTemplateScalarFieldEnum]
+
+
+export const BookingAccountScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  name: 'name',
+  type: 'type',
+  description: 'description',
+  isArchived: 'isArchived',
+  isPostable: 'isPostable',
+  position: 'position',
+  ownerId: 'ownerId',
+  templateId: 'templateId',
+  parentId: 'parentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BookingAccountScalarFieldEnum = (typeof BookingAccountScalarFieldEnum)[keyof typeof BookingAccountScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1157,6 +1437,20 @@ export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaM
 
 
 /**
+ * Reference to a field of type 'UserRole'
+ */
+export type EnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole'>
+    
+
+
+/**
+ * Reference to a field of type 'UserRole[]'
+ */
+export type ListEnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole[]'>
+    
+
+
+/**
  * Reference to a field of type 'BigInt'
  */
 export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
@@ -1195,6 +1489,27 @@ export type EnumPartnerLinkStatusFieldRefInput<$PrismaModel> = FieldRefInputType
  * Reference to a field of type 'PartnerLinkStatus[]'
  */
 export type ListEnumPartnerLinkStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PartnerLinkStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'BookingAccountType'
+ */
+export type EnumBookingAccountTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BookingAccountType'>
+    
+
+
+/**
+ * Reference to a field of type 'BookingAccountType[]'
+ */
+export type ListEnumBookingAccountTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BookingAccountType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -1369,6 +1684,9 @@ export type GlobalOmitConfig = {
   rateLimit?: Prisma.RateLimitOmit
   partner?: Prisma.PartnerOmit
   partnerUserLink?: Prisma.PartnerUserLinkOmit
+  bucket?: Prisma.BucketOmit
+  bookingAccountTemplate?: Prisma.BookingAccountTemplateOmit
+  bookingAccount?: Prisma.BookingAccountOmit
 }
 
 /* Types for Logging */

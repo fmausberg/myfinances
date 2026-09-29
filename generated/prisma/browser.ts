@@ -52,3 +52,18 @@ export type Partner = Prisma.PartnerModel
  * 
  */
 export type PartnerUserLink = Prisma.PartnerUserLinkModel
+/**
+ * Model Bucket
+ * 
+ */
+export type Bucket = Prisma.BucketModel
+/**
+ * Model BookingAccountTemplate
+ * 
+ */
+export type BookingAccountTemplate = Prisma.BookingAccountTemplateModel
+/**
+ * Model BookingAccount
+ * 
+ */
+export type BookingAccount = Prisma.BookingAccountModel
